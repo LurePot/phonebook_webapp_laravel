@@ -185,11 +185,12 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Relation</th>
+                                            <th>Number</th>
+                                            <th>Email</th>
+                                            <th>Location</th>
+                                            <th>Photo</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
