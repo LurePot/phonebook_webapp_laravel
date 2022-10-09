@@ -28,5 +28,7 @@ Route::middleware([
 Route::resource('/contact', ContactController::class);
 });
 
+// search
+Route::get('/search/', [ContactController::class, "search"])->name('search');
 
 

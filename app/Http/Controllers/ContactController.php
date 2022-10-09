@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
@@ -128,6 +129,22 @@ class ContactController extends Controller
         } else {
             return back()->with('message', "Update Failed!!!");
         }
+    }
+
+    public function search(Request $request){
+        // Get the search value from the request
+        $search = $request->input('search');
+
+        // Search in the title and body columns from the posts table
+        $contact = Contact::query()
+            ->where('name', 'LIKE', "%{$search}%")
+            ->orwhere('phone', 'LIKE', "%{$search}%")
+            ->orWhere('email', 'LIKE', "%{$search}%")
+            ->get();
+    
+        // Return the search view with the resluts compacted
+        return view('search.index', compact('contact'))
+        ->with('user', Auth::user());
     }
 
     /**

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Add Contact')
-@section('index', 'Add Contact')
+@section('title', 'Dashboard')
+@section('index', 'Dashboard')
 @section('content')
     <div class="row">
         @include('partial.flash')
@@ -10,16 +10,7 @@
 
         <div class="col-xl-3 col-md-6">
             <div class="card bg-primary text-white mb-4">
-                <div class="card-body">Primary Card</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-warning text-white mb-4">
-                <div class="card-body">Warning Card</div>
+                <div class="card-body">Total Contact</div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
                     <a class="small text-white stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -28,7 +19,16 @@
         </div>
         <div class="col-xl-3 col-md-6">
             <div class="card bg-success text-white mb-4">
-                <div class="card-body">Success Card</div>
+                <div class="card-body">Favourite List</div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-warning text-white mb-4">
+                <div class="card-body">Block List</div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
                     <a class="small text-white stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -37,7 +37,7 @@
         </div>
         <div class="col-xl-3 col-md-6">
             <div class="card bg-danger text-white mb-4">
-                <div class="card-body">Danger Card</div>
+                <div class="card-body">Trash List</div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
                     <a class="small text-white stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -103,7 +103,7 @@
        
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            DataTable Example
+            Contact Information
         </div>
         <div class="card-body">
             <table id="datatablesSimple">
