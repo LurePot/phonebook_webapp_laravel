@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,11 @@ Route::resource('/contact', ContactController::class);
 
 // search
 Route::get('/search/', [ContactController::class, "search"])->name('search');
+// add favorite 
+Route::post('/favorite/{id}', [ContactController::class, "favorite"])->name('favorite');
+
+// favorite
+Route::resource('/favorite', FavoriteController::class);
+Route::post('/destroy/{con_id}', [FavoriteController::class, "destroy"])->name('destroy');
 
 

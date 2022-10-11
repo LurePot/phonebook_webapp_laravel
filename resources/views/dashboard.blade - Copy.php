@@ -1,9 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Dashboard')
-@section('index')
-<h3 class="text-capitalize"> of {{ Auth::user()->name }}</h3>
-@endsection
+@section('index', 'Dashboard')
 @section('content')
     <div class="row">
         @include('partial.flash')
@@ -21,7 +19,7 @@
         </div>
         <div class="col-xl-3 col-md-6">
             <div class="card bg-success text-white mb-4">
-                <div class="card-body"><h4> Favorite List : {{count($bookmark)}}</h4></div>
+                <div class="card-body"><h4> Favourite List : {{count($bookmark)}}</h4></div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
                     <a class="small text-white stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -30,7 +28,7 @@
         </div>
         <div class="col-xl-3 col-md-6">
             <div class="card bg-warning text-white mb-4">
-                <div class="card-body"><h4> Black List : {{ count($blacklist) }}</h4></div>
+                <div class="card-body">Block List</div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
                     <a class="small text-white stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -39,7 +37,7 @@
         </div>
         <div class="col-xl-3 col-md-6">
             <div class="card bg-danger text-white mb-4">
-                <div class="card-body"><h4>Trashed List : {{count($trashed)}}</h4></div>
+                <div class="card-body">Trash List</div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
                     <a class="small text-white stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -49,92 +47,62 @@
     </div>
 
     <div class="card-header rounded py-2 d-flex justify-content-between bg-info">
-        <h5 class="m-0 font-weight-bold text-light mt-1"> Add Contact</h5>
+        <h6 class="m-0 font-weight-bold text-light mt-2">Add Contact</h6>
         <a href="{{ url('/contact/create') }}" class="btn btn-success btn-circle btn-sm" title="Add Contact">
             <i class="fa-solid fa-address-book"></i>
         </a>
     </div>
-{{-- ======================================================= --}}
-{{-- bookmark --}}
-<div class="card mb-4 mt-3">
 
-    @if ($bookmark->count() > 0)
+    <div class="card-body">
+       
+        <thead>
+            {{-- sum Contact --}}
+            <tr>
+                <th colspan="5">
+                    <h5 class="font-weight-bold tex-info">Bookmark: ({{count($bookmark)}})</h5>
+                </th>
+        </thead>
+        
+        @php
+          
 
+        @endphp
 
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            Contact Information
-        </div>
-        <div class="card-body">
-            <table class='table table-responsive'>
-                <thead>
-                    <tr>
-                        <th>Photo</th>
-                        <th>Name</th>
-                        <th>Relation</th>
-                        <th>Number</th>
-                        <th>Email</th>
-                        <th>Contact ID</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                  
-                    </tr>
-                </tfoot>
+        @foreach ($bookmark as $cont)
+            <table class="table table-hover border my-0">
                 <tbody>
-                    @foreach ($bookmark as $fav)
-                        <tr>
-                            <a href="{{ url('contact/' . $fav->id) }}"> <span>
-                                    <td>
 
-                                        @if ($fav?->photo == null || $fav?->photo == '')
-                                            <img class="ms-0"
-                                                src="{{ url(Storage::url('public/contact/default2.png')) }}"
-                                                alt="{{ $fav?->name }}" width='30px'
-                                                class="rounded-circle d-block float-start me-4 mt-2 mb-2">
-                                        @else
-                                            <img class="ms-0"
-                                                src="{{ url(Storage::url('public/contact/' . $fav->photo)) }}"
-                                                alt="{{ $user?->name }}" width='30px'
-                                                class="border  border-success rounded-circle d-block float-start me-4 mt-2 mb-2">
-                                        @endif
+                    <tr>
+                        <td>
+                            @if ($cont?->photo == null || $cont?->photo == '')
+                                <img class="ms-0" src="{{ url(Storage::url('public/contact/default2.png')) }}"
+                                    alt="{{ $cont?->name }}" width='30px'
+                                    class="rounded-circle d-block float-start me-4 mt-2 mb-2">
+                            @else
+                                <img class="ms-0" src="{{ url(Storage::url('public/contact/' . $cont->photo)) }}"
+                                    alt="{{ $user?->name }}" width='30px'
+                                    class="border  border-success rounded-circle d-block float-start me-4 mt-2 mb-2">
+                            @endif
+                        </td>
+                        <td>{{ $cont->name }}</td>
+                        <td class="d-none d-xl-table-cell">{{ $cont->relation }}</td>
+                        <td>{{ $cont->phone }}</td>
+                        <td class="d-none d-xl-table-cell">{{ $cont->id }}</td>
+                        <td class="d-none d-xl-table-cell">{{ $cont->email }}</td>
+                        <td class="d-flex justify-content-between" width="120px">
+                            {{-- bookmark --}}
+                            <a href="{{ url('contact/' . $cont->id . '/bookmark') }}"
+                                class="btn btn-info btn-circle btn-sm fav" title="Favourite">
+                                <i class="fas fa-star"></i>
+                            </a>
 
-                                    </td>
-                                    <td>{{ $fav->name }}</td>
-                                    <td>{{ $fav->relation }}</td>
-                                    <td>{{ $fav->phone }}</td>
-                                    <td>{{ $fav->email }}</td>
-                                    <td>{{ $fav->id }}</td>
-                                    
-                                </span> </a>
-                            <td class="d-flex justify-content-between align-self-center">
-                                
-                                {{-- {!! Form::open(['method' => 'delete', 'route' => ['favorite.destroy', $fav->id]]) !!} --}}
-                                <form action="{{url('/destroy/'. $fav->id)}}" method="POST">
-                                    @csrf
-                                 {{-- {{DB::table('favorites')->where('con_id', $fav->id)->delete()}} --}}
-                                <button onclick="return confirm('Are you sure?')"
-                                    class="btn btn-danger btn-sm btn-circle me-1">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                                <a href="{{ url('favorite/' . $fav->id) }}" class="btn btn-info btn-circle btn-sm me-1"
-                                    title="View">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
+                        </td>
+                    </tr>
                 </tbody>
-            </table>
-        </div>
-    @else
-        <li class="btn btn-warning text-info"> <h4>Your Favorite list is empty</h4></li>
-    @endif
-</div>
-{{-- ======================================================= --}}
+        @endforeach
+        </table>
+    </div>
+
     <div class="card mb-4">
 
         @if ($contacts->count() > 0)
@@ -169,30 +137,30 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($contacts as $con)
+                        @foreach ($contacts as $cont)
                             <tr>
-                                <a href="{{ url('contact/' . $con->id) }}"> <span>
+                                <a href="{{ url('contact/' . $cont->id) }}"> <span>
                                         <td>
 
-                                            @if ($con?->photo == null || $con?->photo == '')
+                                            @if ($cont?->photo == null || $cont?->photo == '')
                                                 <img class="ms-0"
                                                     src="{{ url(Storage::url('public/contact/default2.png')) }}"
-                                                    alt="{{ $con?->name }}" width='30px'
+                                                    alt="{{ $cont?->name }}" width='30px'
                                                     class="rounded-circle d-block float-start me-4 mt-2 mb-2">
                                             @else
                                                 <img class="ms-0"
-                                                    src="{{ url(Storage::url('public/contact/' . $con->photo)) }}"
+                                                    src="{{ url(Storage::url('public/contact/' . $cont->photo)) }}"
                                                     alt="{{ $user?->name }}" width='30px'
                                                     class="border  border-success rounded-circle d-block float-start me-4 mt-2 mb-2">
                                             @endif
 
                                         </td>
-                                        <td>{{ $con->name }}</td>
-                                        <td>{{ $con->relation }}</td>
-                                        <td>{{ $con->phone }}</td>
-                                        <td>{{ $con->email }}</td>
+                                        <td>{{ $cont->name }}</td>
+                                        <td>{{ $cont->relation }}</td>
+                                        <td>{{ $cont->phone }}</td>
+                                        <td>{{ $cont->email }}</td>
                                         <td>
-                                            <form action="{{ url('favorite', $con->id) }}" method="POST">
+                                            <form action="{{ url('favorite', $cont->id) }}" method="POST">
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm btn-secondary"
                                                     data-bs-toggle="tooltip" title="Add Favorite">
@@ -202,17 +170,17 @@
                                         </td>
                                     </span> </a>
                                 <td class="d-flex justify-content-between align-self-center">
-                                    {!! Form::open(['method' => 'delete', 'route' => ['contact.destroy', $con->id]]) !!}
+                                    {!! Form::open(['method' => 'delete', 'route' => ['contact.destroy', $cont->id]]) !!}
                                     <button onclick="return confirm('Are you sure?')"
                                         class="btn btn-danger btn-sm btn-circle me-1">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                     {!! Form::close() !!}
-                                    <a href="{{ url('contact/' . $con->id . '/edit') }}"
+                                    <a href="{{ url('contact/' . $cont->id . '/edit') }}"
                                         class="btn btn-primary btn-circle btn-sm me-1" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ url('contact/' . $con->id) }}" class="btn btn-info btn-circle btn-sm me-1"
+                                    <a href="{{ url('contact/' . $cont->id) }}" class="btn btn-info btn-circle btn-sm me-1"
                                         title="View">
                                         <i class="fas fa-eye"></i>
                                     </a>
@@ -223,7 +191,7 @@
                 </table>
             </div>
         @else
-            <li class="btn btn-warning text-danger"><h4>Your contact list is empty</h4></li>
+            <li class="btn btn-warning">Contact list is empty</li>
         @endif
     </div>
     </div>

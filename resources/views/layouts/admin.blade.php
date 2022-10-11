@@ -31,14 +31,9 @@
             <form action="{{ route('search') }}" method="GET" class="d-none d-md-inline-block form-inline ms-auto me-2 col-lg-2 me-md-3 my-2 my-md-0">
                 <div class="input-group">
                     
-                        {{-- @csrf --}}
-                        <input class="form-control" type="text" name="search" required/>
+                        <input class="form-control" type="text" name="search" placeholder="Search for..." required/>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                     
-
-
-                    {{-- <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>--}}
                 </div> 
             </form>
             <!-- Navbar-->
@@ -108,7 +103,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">PhoneBook</h1>
+                        <h1 class="mt-4 text-info">PhoneBook</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">@yield('index')</li>
                         </ol>

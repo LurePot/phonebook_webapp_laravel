@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use App\Models\Favorite;
 use App\Http\Requests\StoreContactRequest;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UpdateContactRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -22,12 +24,23 @@ class ContactController extends Controller
     public function index()
     {
         $contacts = Contact::where('user_id', Auth::id())->orderBy('name')->get();
-        $bookmark = Contact::where('bookmark', 1)->orderBy('name')->get();
-        // dd($bookmark);
+        // $fid= Favorite::find('id');
+        // dd($fid);
+        $bk = Favorite::pluck('con_id');
+        $bookmark = DB::table('contacts')->whereIn('id', $bk)
+            ->where('user_id', Auth::id())->get();
+            
+            $trashed = Contact::onlyTrashed()->get();
+            $blacklist = Favorite::onlyTrashed()->get();
+           
+
+
         return view('dashboard')
-        ->with('contacts', $contacts)
-        ->with('bookmark', $bookmark)
-        ->with('user', Auth::user());
+            ->with('contacts', $contacts)
+            ->with('bookmark', $bookmark)
+            ->with('trashed', $trashed)
+            ->with('blacklist', $blacklist)
+            ->with('user', Auth::user());
     }
 
     /**
@@ -37,7 +50,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-       
+
         return view('contact.create')->with('user', Auth::user());
     }
 
@@ -50,16 +63,16 @@ class ContactController extends Controller
     public function store(StoreContactRequest $request)
     {
         // dd($request);
-         // pathinfo();
+        // pathinfo();
         //    image require for the first time
         if (!$request->has('photo')) {
             return back()->withInput()->with('error', 'Please Upload Image!');
         }
 
-        $unrid = strtolower(Auth::user()->name) . '_' . Auth::id(). rand(1,500);          
-            //  dd($unrid );
+        $unrid = strtolower(Auth::user()->name) . '_' . Auth::id() . rand(1, 500);
+        //  dd($unrid );
         $image = $request->file('photo');
-  
+
         $filename = $unrid . '.png';
         $path = $image->storeAs('public/contact', $filename);
         $storagepath = Storage::path($path);
@@ -95,9 +108,10 @@ class ContactController extends Controller
     public function show(Contact $contact)
     {
         return view('contact.show')
-        ->with('contact',$contact)
-        ->with('user', Auth::user());
+            ->with('contact', $contact)
+            ->with('user', Auth::user());
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -108,8 +122,8 @@ class ContactController extends Controller
     public function edit(Contact $contact)
     {
         return view('contact.edit')
-        ->with('contact', $contact)
-        ->with('user', Auth::user());
+            ->with('contact', $contact)
+            ->with('user', Auth::user());
     }
 
     /**
@@ -131,7 +145,23 @@ class ContactController extends Controller
         }
     }
 
-    public function search(Request $request){
+    public function favorite($id)
+    {
+
+        $con = Contact::find($id);
+        $favorite = new Favorite();
+        $favorite->user_id = $con->user_id;
+        $favorite->con_id = $con->id;
+        // replace the request filename with desired name
+        if ($favorite->save()) {
+            return back()->with('message', "Favorite Successfully!");
+        } else {
+            return back()->with('message', "Favorite Failed!!!");
+        }
+    }
+
+    public function search(Request $request)
+    {
         // Get the search value from the request
         $search = $request->input('search');
 
@@ -141,10 +171,10 @@ class ContactController extends Controller
             ->orwhere('phone', 'LIKE', "%{$search}%")
             ->orWhere('email', 'LIKE', "%{$search}%")
             ->get();
-    
+
         // Return the search view with the resluts compacted
         return view('search.index', compact('contact'))
-        ->with('user', Auth::user());
+            ->with('user', Auth::user());
     }
 
     /**
@@ -158,5 +188,10 @@ class ContactController extends Controller
         $contact->delete();
         return redirect()->route('dashboard')->with('success', 'Contact deleted successfully.');
     }
-    
+
+    public function trashed()
+    {
+        $contacts = Contact::onlyTrashed()->get();
+        return view('contact.trashed', compact('contacts'))->with('user', Auth::user());
+    }
 }

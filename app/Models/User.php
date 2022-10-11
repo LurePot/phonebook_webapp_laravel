@@ -49,7 +49,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    public function contacts()
+    {
+    return $this->hasMany('App\Models\Contact');
+    }
+    public function favorites()
+    {
+    return $this->hasMany('App\Models\Favorite');
+    }
     /**
      * The accessors to append to the model's array form.
      *

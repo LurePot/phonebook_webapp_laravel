@@ -6,17 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
-class Contact extends Model
+class favorite extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        'name',
-        'relation',
         'user_id',
-        'phone',
-        'email',
-        'photo'
+        'con_id'
     ];
 
     /**
@@ -25,11 +20,8 @@ class Contact extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-    // public function favorites()
-    // {
-    // return $this->hasMany('App\Models\Favorite');
-    // }
+{
+    return $this->belongsTo(User::class);
+}
+    
 }
