@@ -18,9 +18,12 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
-            $table->string('relation')->nullable();
-            $table->string('phone');
+            $table->string('phone')->unique();
+            $table->string('altph')->nullable();
             $table->string('email');
+            $table->string('altml')->nullable();
+            $table->string('relation')->nullable();
+            $table->string('location')->nullable();
             $table->string('photo')->nullable();
             $table->set('bookmark',['1','0'])->default('0');
             $table->softDeletes();

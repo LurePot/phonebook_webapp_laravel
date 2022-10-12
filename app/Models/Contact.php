@@ -15,7 +15,10 @@ class Contact extends Model
         'relation',
         'user_id',
         'phone',
+        'altph',
         'email',
+        'altml',
+        'location',
         'photo'
     ];
 

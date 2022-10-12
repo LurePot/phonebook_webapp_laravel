@@ -12,7 +12,7 @@
                 <i class="fas fa-arrow-left"></i>
             </a>
         </div>
-        <div class="card-body text-end bg-image mt-2 rounded bg-primary ">
+        <div class="card-body text-lg-end text-center bg-image mt-2 rounded bg-primary ">
             @if ($contact?->photo == null || $contact?->photo == '')
                 <img src="{{ url(Storage::url('public/contact/default2.png')) }}" alt="image"
                     class="image-fluid rounded-circle" height="110px">

@@ -2,7 +2,7 @@
 
 @section('title', 'Dashboard')
 @section('index')
-<h3 class="text-capitalize"> of {{ Auth::user()->name }}</h3>
+{{-- <h3 class="text-capitalize"> of {{ Auth::user()->name }}</h3> --}}
 @endsection
 @section('content')
     <div class="row">
@@ -78,11 +78,7 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                  
-                    </tr>
-                </tfoot>
+               
                 <tbody>
                     @foreach ($bookmark as $fav)
                         <tr>

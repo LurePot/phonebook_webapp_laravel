@@ -103,9 +103,9 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4 text-info">PhoneBook</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">@yield('index')</li>
+                        <h1 class="mt-4 text-lg-start text-center text-info">PhoneBook</h1>
+                        <ol class=" mb-4">
+                            <h4 class=" text-lg-start text-center text-capitalize">of {{ Auth::user()->name }}</h4>
                         </ol>
                         {{-- ================================================ --}}
 						@yield('content')
