@@ -11699,3 +11699,9 @@ body {
   font-size: 0.75rem;
   border-radius: 0.25rem !important;
 }
+/* required  */
+    .required:after{ 
+        content:'*'; 
+        color:red;
+        padding-left:5px;
+    }

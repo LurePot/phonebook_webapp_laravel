@@ -58,7 +58,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="{{ url('/dashboard') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
@@ -70,8 +70,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Add Contact</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">View Contacts</a>
+                                    <a class="nav-link" href="{{ url('/contact/create') }}">Add Contact</a>
+                                    <a class="nav-link" href="{{ url('/dashboard') }}">View Contacts</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as: {{ Auth::user()->name }}</div>
+                        <div class="small text-capitalize">Logged in as: {{ Auth::user()->name }}</div>
                         Phonebook
                     </div>
                 </nav>
@@ -103,10 +103,12 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4 text-lg-start text-center text-info">PhoneBook</h1>
-                        <ol class=" mb-4">
-                            <h4 class=" text-lg-start text-center text-capitalize">of {{ Auth::user()->name }}</h4>
-                        </ol>
+                        <div>
+                            <h1 class="mt-4 text-lg-start text-center text-info">PhoneBook</h1>
+                        <span class=" mb-5">
+                            <h5 class=" text-lg-start text-center text-capitalize">of {{ Auth::user()->name }}</h5>
+                        </span> <br>
+                        </div>
                         {{-- ================================================ --}}
 						@yield('content')
                         {{-- ================================================ --}}

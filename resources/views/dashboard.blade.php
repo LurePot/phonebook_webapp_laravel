@@ -62,8 +62,8 @@
 
 
         <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            Contact Information
+          <h4 class="text-success"><i class="fa fa-bookmark" aria-hidden="true"></i>
+            Favorite Contact List</h4> 
         </div>
         <div class="card-body">
             <table class='table table-responsive'>
@@ -71,10 +71,10 @@
                     <tr>
                         <th>Photo</th>
                         <th>Name</th>
-                        <th>Relation</th>
+                        <th class="d-none d-xl-table-cell">Relation</th>
                         <th>Number</th>
                         <th>Email</th>
-                        <th>Contact ID</th>
+                        <th class="d-none d-xl-table-cell">Contact ID</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -98,11 +98,11 @@
                                         @endif
 
                                     </td>
-                                    <td>{{ $fav->name }}</td>
-                                    <td>{{ $fav->relation }}</td>
+                                    <td class="text-capitalize">{{ $fav->name }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ $fav->relation }}</td>
                                     <td>{{ $fav->phone }}</td>
                                     <td>{{ $fav->email }}</td>
-                                    <td>{{ $fav->id }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ $fav->id }}</td>
                                     
                                 </span> </a>
                             <td class="d-flex justify-content-between align-self-center">
@@ -131,14 +131,14 @@
     @endif
 </div>
 {{-- ======================================================= --}}
-    <div class="card mb-4">
+    <div class="card mb-5">
 
         @if ($contacts->count() > 0)
 
 
             <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                Contact Information
+               <h4 class="text-primary"> <i class="fa fa-address-book" aria-hidden="true"></i>
+               Your Contact List </h4>
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
@@ -146,9 +146,9 @@
                         <tr>
                             <th>Photo</th>
                             <th>Name</th>
-                            <th>Relation</th>
+                            <th class="d-none d-xl-table-cell">Relation</th>
                             <th>Number</th>
-                            <th>Email</th>
+                            <th class="d-none d-xl-table-cell">Email</th>
                             <th>Bookmark</th>
                             <th>Action</th>
                         </tr>
@@ -157,9 +157,9 @@
                         <tr>
                             <th>Photo</th>
                             <th>Name</th>
-                            <th>Relation</th>
+                            <th class="d-none d-xl-table-cell">Relation</th>
                             <th>Number</th>
-                            <th>Email</th>
+                            <th class="d-none d-xl-table-cell">Email</th>
                             <th>Bookmark</th>
                             <th>Action</th>
                         </tr>
@@ -183,15 +183,15 @@
                                             @endif
 
                                         </td>
-                                        <td>{{ $con->name }}</td>
-                                        <td>{{ $con->relation }}</td>
+                                        <td class="text-capitalize">{{ $con->name }}</td>
+                                        <td class="d-none d-xl-table-cell">{{ $con->relation }}</td>
                                         <td>{{ $con->phone }}</td>
-                                        <td>{{ $con->email }}</td>
+                                        <td class="d-none d-xl-table-cell">{{ $con->email }}</td>
                                         <td>
                                             <form action="{{ url('favorite', $con->id) }}" method="POST">
                                                 @csrf
-                                                <button type="submit" class="btn btn-sm btn-secondary"
-                                                    data-bs-toggle="tooltip" title="Add Favorite">
+                                                <button type="submit" class="btn btn-sm btn-success"
+                                                    data-bs-toggle="tooltip" title="Add To Favorite">
                                                     <i class="fa fa-bookmark" aria-hidden="true"></i>
                                                 </button>
                                             </form>

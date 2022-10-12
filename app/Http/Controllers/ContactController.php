@@ -30,8 +30,8 @@ class ContactController extends Controller
         $bookmark = DB::table('contacts')->whereIn('id', $bk)
             ->where('user_id', Auth::id())->get();
             
-            $trashed = Contact::onlyTrashed()->get();
-            $blacklist = Favorite::onlyTrashed()->get();
+            $trashed = Contact::onlyTrashed()->where('user_id', Auth::id())->orderBy('deleted_at')->get();
+            $blacklist = Favorite::onlyTrashed()->where('user_id', Auth::id())->orderBy('deleted_at')->get();
            
 
 

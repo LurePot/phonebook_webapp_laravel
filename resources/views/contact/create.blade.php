@@ -16,7 +16,7 @@
             @include('partial.error')
 
             <div class="form-group pb-3">
-                {!! Form::label('name', 'Name', ['class' => 'form-label']) !!}
+                {!! Form::label('name', 'Name', ['class' => 'form-label required']) !!}
                 {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'name', 'placeholder' => 'Name']) !!}
             </div>
             <div class="form-group pb-3">
@@ -24,15 +24,15 @@
                 {!! Form::text('relation', null, ['class' => 'form-control', 'id' => 'relation', 'placeholder' => 'Relation']) !!}
             </div>
             <div class="form-group pb-3">
-                {!! Form::label('phone', 'Phone', ['class' => 'form-label']) !!}
+                {!! Form::label('phone', 'Phone', ['class' => 'form-label required']) !!}
                 {!! Form::text('phone', null, ['class' => 'form-control', 'id' => 'phone', 'placeholder' => 'Phone']) !!}
             </div>
             <div class="form-group pb-3">
-                {!! Form::label('email', 'Email', ['class' => 'form-label']) !!}
+                {!! Form::label('email', 'Email', ['class' => 'form-label required']) !!}
                 {!! Form::text('email', null, ['class' => 'form-control', 'id' => 'email', 'placeholder' => 'Email']) !!}
             </div>
             <div class="form-group pb-3">
-                {!! Form::label('photo', 'Photo', ['class' => 'form-label']) !!}
+                {!! Form::label('photo', 'Photo', ['class' => 'form-label required']) !!}
                 {{-- {!! Form::file('photo', null, ['required','class' => 'form-control', 'id' => 'photo']) !!} --}}
                 <input class="form-control" name="photo" id="photo" type="file">
             </div>
