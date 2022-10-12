@@ -41,12 +41,13 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">&nbsp;&nbsp;{{ Auth::user()->name }}</a></li>
+                        <li><a class="dropdown-item text-success" href="#!"><i class="fa-solid fa-user text-success"></i>&nbsp;&nbsp;{{ Auth::user()->name }}</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="#!">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <input class="btn btn-outline-none btn-sm" type="submit" value="Logout">
+                                <i class="fa-solid fa-right-from-bracket text-danger"></i>
+                                <input class="btn btn-outline-none btn-sm text-danger" type="submit" value="Logout">
                             </form></a></li>
                     </ul>
                 </li>

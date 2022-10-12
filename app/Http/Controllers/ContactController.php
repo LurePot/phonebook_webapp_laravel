@@ -186,6 +186,7 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         $contact->delete();
+        DB::table('favorites')->where('con_id', $contact->id)->delete();
         return redirect()->route('dashboard')->with('success', 'Contact deleted successfully.');
     }
 

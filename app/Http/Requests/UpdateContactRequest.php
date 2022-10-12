@@ -24,7 +24,7 @@ class UpdateContactRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'phone'=>'required|unique:contacts,phone',
         ];
     }
 }
