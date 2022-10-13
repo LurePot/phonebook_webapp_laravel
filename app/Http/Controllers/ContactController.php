@@ -29,10 +29,10 @@ class ContactController extends Controller
         $bk = Favorite::pluck('con_id');
         $bookmark = DB::table('contacts')->whereIn('id', $bk)
             ->where('user_id', Auth::id())->get();
-            
-            $trashed = Contact::onlyTrashed()->where('user_id', Auth::id())->orderBy('deleted_at')->get();
-            $blacklist = Favorite::onlyTrashed()->where('user_id', Auth::id())->orderBy('deleted_at')->get();
-           
+
+        $trashed = Contact::onlyTrashed()->where('user_id', Auth::id())->orderBy('deleted_at')->get();
+        $blacklist = Favorite::onlyTrashed()->where('user_id', Auth::id())->orderBy('deleted_at')->get();
+
 
 
         return view('dashboard')
@@ -158,6 +158,24 @@ class ContactController extends Controller
         } else {
             return back()->with('message', "Favorite Failed!!!");
         }
+    }
+
+    public function allc()
+    {
+        $contacts = Contact::where('user_id', Auth::id())->orderBy('name')->get();
+        // dd($contacts);
+        $bookmark = Favorite::where('user_id', Auth::id())->orderBy('con_id')->get();
+        $trashed = Contact::onlyTrashed()->where('user_id', Auth::id())->orderBy('deleted_at')->get();
+        $blacklist = Favorite::onlyTrashed()->where('user_id', Auth::id())->orderBy('deleted_at')->get();
+
+
+
+        return view('contact.index')
+            ->with('contacts', $contacts)
+            ->with('bookmark', $bookmark)
+            ->with('trashed', $trashed)
+            ->with('blacklist', $blacklist)
+            ->with('user', Auth::user());
     }
 
     public function search(Request $request)

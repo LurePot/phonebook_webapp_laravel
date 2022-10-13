@@ -27,15 +27,17 @@ Route::middleware([
     Route::get('/dashboard', [ContactController::class, "index"])->name('dashboard');
     //contact
 Route::resource('/contact', ContactController::class);
+// all contact
+Route::get('/contact', [ContactController::class, "allc"])->name('allc');
 });
 
 // search
 Route::get('/search/', [ContactController::class, "search"])->name('search');
 // add favorite 
 Route::post('/favorite/{id}', [ContactController::class, "favorite"])->name('favorite');
-
 // favorite
 Route::resource('/favorite', FavoriteController::class);
+// delete favorite
 Route::post('/destroy/{con_id}', [FavoriteController::class, "destroy"])->name('destroy');
 
 

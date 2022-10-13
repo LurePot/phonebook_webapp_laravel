@@ -38,10 +38,17 @@
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                @if (!(Auth::user()?->profile) || (Auth::user()?->profile->image == '' ))
+                    <picture><img width="35px" src="{{ url(Storage::url('public/contact/default2.png')) }}" class="profile pt-1"/></picture> 
+                    @else
+                        <picture><img width="35px" src="{{url(Storage::url('public/contact/'.Auth::user()->profile->image))}}" alt="{{auth()->user()?->name}}" class="profile pt-1"/></picture>
+                    @endif
+                    <!--end if -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            
+                    <a class="nav-link dropdown-toggle text-capitalize" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{auth()->user()?->name}}</a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item text-success" href="#!"><i class="fa-solid fa-user text-success"></i>&nbsp;&nbsp;{{ Auth::user()->name }}</a></li>
+                        <li><a class="dropdown-item text-success" href="#!"><i class="fa-solid fa-user text-success"></i>&nbsp;&nbsp;Profile</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="#!">
                             <form method="POST" action="{{ route('logout') }}">
