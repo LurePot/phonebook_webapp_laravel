@@ -29,6 +29,7 @@ Route::middleware([
 Route::resource('/contact', ContactController::class);
 // all contact
 Route::get('/contact', [ContactController::class, "allc"])->name('allc');
+Route::get('/contact/trashed', [ContactController::class, "trashed"])->name('trashed');
 });
 
 // search

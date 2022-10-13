@@ -23,7 +23,7 @@
             <div class="card bg-success text-white mb-4">
                 <div class="card-body"><h4> Favorite List : {{count($bookmark)}}</h4></div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <a class="small text-white stretched-link" href="{{ url('/favorite/') }}">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                                     <td class="d-none d-xl-table-cell">{{ $fav->relation }}</td>
                                     <td>{{ $fav->phone }}</td>
                                     <td>{{ $fav->email }}</td>
-                                    <td class="d-none d-xl-table-cell">{{ $fav->id }}</td>
+                                    <td class="d-none d-xl-table-cell"><i class="fa fa-bookmark text-success"></i></td>
                                     
                                 </span> </a>
                             <td class="d-flex justify-content-between align-self-center">
@@ -190,7 +190,7 @@
                                         <td>
                                             <form action="{{ url('favorite', $con->id) }}" method="POST">
                                                 @csrf
-                                                <button type="submit" class="btn btn-sm btn-success"
+                                                <button type="submit" class="btn btn-sm btn-secondary"
                                                     data-bs-toggle="tooltip" title="Add To Favorite">
                                                     <i class="fa fa-bookmark" aria-hidden="true"></i>
                                                 </button>

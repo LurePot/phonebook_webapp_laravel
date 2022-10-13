@@ -210,7 +210,7 @@ class ContactController extends Controller
 
     public function trashed()
     {
-        $contacts = Contact::onlyTrashed()->get();
-        return view('contact.trashed', compact('contacts'))->with('user', Auth::user());
+        $trashed = Contact::onlyTrashed()->get();
+        return view('contact.trashed', compact('trashed'))->with('user', Auth::user());
     }
 }

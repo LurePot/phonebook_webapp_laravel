@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Favorite;
@@ -17,7 +18,20 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        //
+        $contacts = Contact::where('user_id', Auth::id())->get();
+        // dd($contacts);
+        $bookmark = Favorite::where('user_id', Auth::id())->orderBy('con_id')->get();
+        $trashed = Contact::onlyTrashed()->where('user_id', Auth::id())->orderBy('deleted_at')->get();
+        $blacklist = Favorite::onlyTrashed()->where('user_id', Auth::id())->orderBy('deleted_at')->get();
+
+
+
+        return view('favorite.index')
+            ->with('contacts', $contacts)
+            ->with('bookmark', $bookmark)
+            ->with('trashed', $trashed)
+            ->with('blacklist', $blacklist)
+            ->with('user', Auth::user());
     }
 
     /**
